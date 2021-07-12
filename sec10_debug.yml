@@ -1,0 +1,18 @@
+---
+  - name: Explore the use of debug module
+    hosts: localhost
+    gather_facts: no
+    vars:
+      - x: 4
+      - y: 6
+    tasks:
+    - name: Explore the use of var using a variable
+      debug: var=y
+    - name: Explore the use of msg
+      debug:
+        msg:
+          - "This is first message"
+          - "This is second message"
+          - "This is third message"
+          - "The value of x is: {{x}}"
+          - "The value of y is: {{y}}"

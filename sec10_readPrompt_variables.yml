@@ -1,0 +1,21 @@
+---
+#   Explore how to read variables while running a playbook
+#   This is done using 'vars_prompt' section in your playbook
+#   by default the prompt value is private i.e. it won't display the value you are typing
+#     when a prompt asks for the input value.
+#   use 'private: no' to display the value while prompt asks it
+  - name: Explore how to read variables while running a playbook
+    hosts: localhost
+    gather_facts: no
+    vars_prompt:              # this section initiates prompt to ask for values while running playbook
+      - name: user_name
+        prompt: Enter your user name
+        private: no           # this will display the username you type
+      - name: password
+        prompt: Enter your password
+        private: yes          # this won't display the password you type
+    tasks:
+    - debug:
+        msg:
+          - "{{ user_name }}"
+          - "{{ password }}"

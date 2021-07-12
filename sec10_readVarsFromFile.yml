@@ -1,0 +1,23 @@
+---
+# ------------------ READ FROM YML FILE -----------------------
+#   In the first play we will read from file 'variables.yml'
+#   In the second play we will read from file 'variables.json'
+#   'vars_files' is used to read from a file
+  - name: Explore reading variables from a yml file
+    hosts: localhost
+    vars_files: 
+      - variables.yml
+      - variables.json
+    gather_facts: no
+    tasks:
+    # read from yml file and display the variable value
+    - name: Displaying 'pkgs' variable from 'yml' file
+      debug:
+        msg:
+          - "Packages are: {{ pkgs }}"
+
+# ------------------ READ FROM JSON FILE -----------------------
+    - name: Displaying 'name' variable from 'json' file
+      debug:
+        msg:
+          - "Name is {{ name }}"

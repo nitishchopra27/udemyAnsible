@@ -1,0 +1,16 @@
+Ansible default variables
+    inventory_hostname
+    inventory_hostname_short
+    groups
+    groups.keys()
+
+Modules
+ping
+debug           # display messages (var/msg)
+setup           # get environment variables of the remote host
+gather_facts
+copy            # copy files
+file            # create/delete file/directory
+command         # run commands on remote host
+shell           # run commands on remote host
+fetch           # fetch files from remote host

@@ -1,0 +1,36 @@
+---
+# filters and methods are basicall applying string manipulations
+# e.g. string.loer(), string.ipper() methods that are applied in python
+# it is said that ansible uses jinja2 methods
+# e.g. (string|lower), (string|upper)
+
+# ---------------------- JINJA2 ------------------------- 
+  - name: Explore the use of methods and filters using JINJA2 methods
+    gather_facts: no
+    hosts: localhost
+    vars:
+      x: "ThiS IS abOut Ansible FiLtErS AND mETHODS"
+      y: "56"
+      z: [1,2,3,4,5]
+    tasks:
+    - debug:
+        msg:
+          - "{{ x|lower }}"
+          - "{{ x|upper }}"
+          - "{{ x|title }}"
+          - "{{ y|int }}"
+          - "{{ z|min }}"
+          - "{{ z|max }}"
+
+# ---------------------- PYTHON ------------------------- 
+  - name: Explore the use of methods and filters using PYTHON methods
+    gather_facts: no
+    hosts: localhost
+    vars:
+      x: "ThiS IS abOut Ansible FiLtErS AND mETHODS"
+    tasks:
+    - debug:
+        msg:
+          - "{{ x.lower() }}"
+          - "{{ x.upper() }}"
+          - "{{ x.title() }}"

@@ -1,0 +1,19 @@
+---
+  - name: Explore the use of variable Data Types
+    hosts: localhost
+    gather_facts: no
+    vars:
+      x: 23               # this is an integer
+      y: "Nitish Chopra"  # this is Ansibleunicode
+      z: [1,2,3,4,5]      # this is list
+      a: True             # this is boolean
+      b: {'first_name' : 'nitish', 'second_name' : 'chopra'}  # this is dictionary
+    tasks:
+    - name: Display the value of variables
+      debug:
+        msg:
+          - "The value of x is {{ x }} of type: {{x|type_debug}}"
+          - "The value of y is {{ y }} of type: {{y|type_debug}}"
+          - "The value of z is {{ z }} of type: {{z|type_debug}}"
+          - "The value of a is {{ a }} of type: {{a|type_debug}}"
+          - "The value of b is {{ b }} of type: {{b|type_debug}}"

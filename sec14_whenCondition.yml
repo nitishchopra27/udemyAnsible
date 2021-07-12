@@ -1,0 +1,35 @@
+---
+  - name: Using when condition to install packages on Ubuntu and CentOS hosts
+    hosts: web_servers
+    become: yes
+    tags: httpd,apache
+    tasks:
+
+      - name: Install httpd and php package on CentOS servers
+        package:
+          name: 
+            - php
+            - httpd
+          state: latest
+        when: ansible_distribution == "CentOS"
+      
+      - name: Install apache2 and php package on Ubuntu servers
+        package:
+          name: 
+            - libapache2-mod-php
+            - apache2
+          state: latest
+        when: ansible_distribution == "Ubuntu"
+      
+  - name: Fetch authorized_keys file from all servers
+    hosts: servers14
+    become: yes
+    tags: all
+    gather_facts: no
+    tasks:
+
+      - name: Fetch file from Remote Hosts
+        fetch:
+          src: /home/nitishchopra/.ssh/authorized_keys
+          dest: /tmp/keys-{{inventory_hostname}}
+          flat: yes

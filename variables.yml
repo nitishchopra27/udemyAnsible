@@ -1,0 +1,6 @@
+---
+  x: 45
+  y: [1,4,7,87,23,"ansible"]
+  pkgs:
+    "CentOS" : "httpd"
+    "Ubuntu" : "apache2"

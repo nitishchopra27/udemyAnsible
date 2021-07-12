@@ -1,0 +1,16 @@
+---
+  - name: Explore arithmetic operators in ansible
+    hosts: localhost
+    gather_facts: no
+    vars:
+      x: 64
+      y: 56
+    tasks:
+    - debug:
+        msg:
+          - "Addition operator x + y = {{ x + y }}"
+          - "Subtraction operator x - y = {{ x - y }}"
+          - "Multiplication operator x * y = {{ x * y }}"
+          - "Division operator x / y = {{ x / y }}"
+          - "Modulo operator x % y = {{ x % y }}"
+          - "Power operator 3 power 4 = {{ 3 | pow(4)}}"

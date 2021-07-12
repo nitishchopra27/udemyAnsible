@@ -1,0 +1,22 @@
+---
+  - name: Explore the use of variable Data Structures
+    hosts: localhost
+    gather_facts: no
+    vars:
+      x: 34
+      y: [1,2,3,4,5]
+      z:
+        - 6
+        - 7
+        - 8
+        - 9
+      a: {"first_name" : "nitish", "second_name" : "chopra"}
+    tasks:
+    - name: Display a variable with single value
+      debug: var=x
+    - name: Display a variable with list in []
+      debug: var=y
+    - name: Display a variable with list in - in multiple lines
+      debug: var=z
+    - name: Display a variable with dictionary
+      debug: var=a

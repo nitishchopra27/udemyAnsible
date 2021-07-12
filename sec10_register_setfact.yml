@@ -1,0 +1,30 @@
+---
+# -------------------- REGISTER ------------------
+  - name: Explore the use of register
+    hosts: localhost
+    gather_facts: no
+    tasks:
+    # register helps save a value in a variable to be used later
+    - name: Simple use of register
+      command: "uptime"
+      register: localhost_uptime                    # register
+    - name: Display the value stored in register
+      debug: var=localhost_uptime.stdout
+
+# -------------------- SET_FACT ------------------
+  - name: Explore the use of set_facts
+    hosts: localhost
+    gather_facts: no
+    tasks:
+    - name: Get uptime and store output in a variable
+      command: "uptime"
+      register: server_uptime
+    # set_facts is a section that stores value of a variable
+    # if you have to perform multiple operations on a variable to get the desired value
+    # e.g. we want the stdout value from the variable not the entire output
+    # you can define any number of values under set_fact
+    - set_fact:                                     # set_fact
+        uptime_value: "{{server_uptime.stdout}}"
+        my_name: "Nitish Chopra"
+    - name: Display the value stored in set_facts section
+      debug: var=uptime_value

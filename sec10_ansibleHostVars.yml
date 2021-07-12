@@ -1,0 +1,13 @@
+---
+# Display the default host variables of a server or group of servers in inventory file
+  - name: Display host variables on all servers in inventory file
+    hosts: localhost
+    gather_facts: false
+    tasks:
+    - debug: var=hostvars             # hostvars has default ansible related variables
+  
+  - name: Display host variables on localhost only
+    hosts: localhost
+    gather_facts: false
+    tasks:
+    - debug: var=hostvars[inventory_hostname]
