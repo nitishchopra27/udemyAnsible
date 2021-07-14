@@ -1,0 +1,13 @@
+---
+  # {{ x if (x > y) else y }}
+  - name: Explore the use of inline condition statement ( if else )
+    hosts: localhost
+    gather_facts: no
+    vars:
+      x: 5
+      y: 9
+    tasks:
+    - debug:
+        msg:
+          - "The larger number of {{x}} and {{y}} is : {{ x if (x > y) else y }}"
+          - "The smaller number of {{x}} and {{y}} is : {{ x if (x < y) else y }}"

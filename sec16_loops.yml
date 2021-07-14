@@ -1,0 +1,26 @@
+---
+  # the items are mentioned in a loop as a list
+  # {{item}} variable is used to run through the loop values one by one
+  - name: Explore the usage of loops in ansible
+    gather_facts: yes
+    become: yes
+    hosts: server4
+    tasks:
+    - debug:
+        msg: "The package ' {{item}} ' will be installed on {{inventory_hostname}}"
+      loop:
+        - gettext-devel
+        - openssl-devel
+        - perl-CPAN
+        - perl-devel
+        - zlib-devel
+    - name: Install multiple packages on {{inventory_hostname}}
+      package:
+        name: "{{item}}"
+        state: latest
+      loop:
+        - gettext-devel
+        - openssl-devel
+        - perl-CPAN
+        - perl-devel
+        - zlib-devel

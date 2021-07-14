@@ -1,0 +1,22 @@
+---
+  # 'notify' is the way to call a handler if any change is made by current task
+  # Handlers are tasks that only run when notified
+  # Each handler should have a globally unique name
+  # e.g. you may want to restart a service if a task updates the configuration of that service,
+  #   but not if the configuration is unchanged
+  - name: Explore the use of handlers in ansible
+    hosts: server4
+    become: yes
+    gather_facts: yes
+    tasks:
+    - name: Install web server 'httpd' on {{inventory_hostname}}
+      package:
+        name: httpd
+        state: latest
+      notify: start_httpd_service
+
+    handlers:
+    - name: start_httpd_service
+      service:
+        name: httpd
+        state: started
