@@ -1,0 +1,34 @@
+---
+  # 'is' keyword is used to test
+  # with the use of test operator we can test:
+  #   - if a value is defined/undefined
+  #   - lower/upper
+  #   - string/number
+  #   - divisibleby
+  #   - even/odd
+  #   - given path exists
+  #   - given path is a file or a directory
+
+  - name: Explore the use of Test operators in ansible
+    hosts: localhost
+    gather_facts: no
+    vars:
+      x: 40
+      my_name: 'nitish'
+      my_path: '/home/nitishchopra/udemyAnsible/notes.txt'
+    tasks:
+    - debug:
+        msg:
+          - "x is defined : {{x is defined}}"
+          - "y is defined : {{y is defined}}"
+          - "z is undefined : {{z is undefined}}"
+          - "my_name is lower : {{my_name is lower}}"
+          - "my_name is upper : {{my_name is upper}}"
+          - "my_name is string : {{my_name is string}}"
+          - "x is number: {{x is number}}"
+          - "x is divisibleby 2 : {{x is divisibleby 2}}"
+          - "x is even : {{x is even}}"
+          - "x is odd : {{x is odd}}"
+          - "my_path is file: {{my_path is file}}"
+          - "my_path is directory: {{my_path is directory}}"
+          - "my_path is exists: {{my_path is exists}}"

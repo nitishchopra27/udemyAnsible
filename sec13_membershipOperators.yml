@@ -1,0 +1,14 @@
+---
+  # 'in'
+  # 'not in'
+  - name: Explore the use of membership operators
+    hosts: localhost
+    gather_facts: no
+    vars:
+      x: [3,4,5]
+      y: 5
+    tasks:
+    - debug:
+        msg:
+          - "{{y}} in {{x}} : {{y in x}}"
+          - "{{y}} not in {{x}} : {{y not in x}}"
