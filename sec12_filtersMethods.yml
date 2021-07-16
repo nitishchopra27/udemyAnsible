@@ -1,6 +1,6 @@
 ---
 # filters and methods are basicall applying string manipulations
-# e.g. string.loer(), string.ipper() methods that are applied in python
+# e.g. string.lower(), string.upper() methods that are applied in python
 # it is said that ansible uses jinja2 methods
 # e.g. (string|lower), (string|upper)
 

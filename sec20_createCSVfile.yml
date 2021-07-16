@@ -1,0 +1,32 @@
+---
+  # modules used to create a csv file:
+  # gather_facts - to collect variables
+  # copy - create a file
+  # lininfile - to add line in a file
+  # NOTE: 'delegate_to' and 'run_once' are required in order to create a csv file on localhost and run
+  #   the task just once
+  - name: Explore creating csv file using a playbook
+    hosts: servers14
+    gather_facts: true
+    vars:
+      file_name: "/tmp/variables.csv"
+    tasks:
+      - block:                          # this block is put to run 'delegate_to' and 'run_once' on ansible controller
+        # remove the csv file
+        - name: remove csv file
+          file:
+            path: "{{file_name}}"
+            state: absent
+        # create a csv file in /tmp directory
+        - name: create csv file variables.csv
+          copy:
+            dest: "{{file_name}}"
+            content: "hostname,ansible_distribution,ansible_distribution_version,ansible_pkg_mgr,ansible_user_id\n"
+        delegate_to: localhost          # delegate these tasks in block to localhost (ansible control host)
+        run_once: true                  # run these tasks just once. We don't want to create multiple files
+      # fill details in the file
+      - name: populate the csv file
+        lineinfile:
+          path: "{{file_name}}"
+          line: "{{inventory_hostname}},{{ansible_distribution}},{{ansible_distribution_version}},{{ansible_pkg_mgr}},{{ansible_user_id}}"
+        delegate_to: localhost          # add the line to file on localhost only not to remote host
