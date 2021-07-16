@@ -1,0 +1,28 @@
+---
+  # 'ignore_errors' - lets the second play run even if the first one fails
+  # 'failed_when' - fail a task when a particular condition is met
+  - name: Explore how to handle errors in a playbook
+    hosts: localhost
+    gather_facts: no
+    tasks:
+    # Explore the use of 'ignore_errors' to skip to next task in the playbook
+    - name: Use of 'ignore_errors' in playbook. Run command 01
+      command: "ls /homee"
+      register: home_out
+      ignore_errors: yes        # ignore_errors - lets the second play run even if the first one fails
+    - debug: var=home_out
+    - name: Run command 02
+      command: "ls /tmp"
+      register: tmp_out
+    - debug: var=tmp_out
+
+    # Explore the use of 'failed_when' to purposefuly fail a task
+    - name: Use of 'failed_when' in playbook. Run command 01
+      command: "ls /homee"
+      register: home_out
+      failed_when: home_out.rc!=0
+    - debug: var=home_out
+    - name: Run command 02
+      command: "ls /tmp"
+      register: tmp_out
+    - debug: var=tmp_out

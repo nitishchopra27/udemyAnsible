@@ -1,0 +1,39 @@
+---
+  # 'block' - put your ansible tasks under a block and apply 'ignore_errors' to entire block
+  # instead of applying 'ignore_errors' to every task. Block is a better way
+  - name: Explore how to handle errors in a playbook using 'block'
+    hosts: localhost
+    gather_facts: no
+    tasks:
+    # Explore the use of 'ignore_errors' to skip to next task in the playbook
+    - block:
+      - name: Use of 'block' in playbook. Run command 01
+        command: "ls /homee"
+        register: home_out
+      - name: Run command 02
+        command: "ls /tmp"
+        register: tmp_out
+      ignore_errors: yes
+    
+    - debug: var=home_out
+    - debug: var=tmp_out
+
+# ----------------------------------------------------------------------------------------
+  # Concept of 'block' and 'rescue' is like 'try' and 'catch' in other languages
+  # if there is an error encountered in 'block' code, then run code under 'rescue'
+  - name: Explore how to handle errors in a playbook using 'block' and 'rescue'
+    hosts: localhost
+    gather_facts: no
+    tasks:
+    - block:
+      - name: Use of 'block' in playbook. Run command 01
+        command: "ls /homee"
+        register: home_out
+      rescue:
+        - name: Running code under 'rescue' block
+          debug:
+            msg: "The given path /homee does not exist"
+      always:
+        - name: Running 'always' block
+          debug:
+            msg: "This will always run"
