@@ -1,0 +1,34 @@
+---
+  - name: Automate installation of Tomcat on CentOS Host
+    hosts: server5
+    gather_facts: true
+    vars:
+      - req_java: java-1.8.0-openjdk
+    become: yes
+    tasks:
+    - name: Update Repositories
+      yum:
+        name: "*"
+        state: latest
+    - name: Install Java
+      yum:
+        name: "{{req_java}}"
+        state: latest
+
+# Modules use to acomplish this task
+# update Repositories
+#   yum *
+# install java
+#   yum
+# seting default java path
+#   alternatives
+# Downloading required tomcat
+#   get_url
+# Extracting downloaded tomcat
+#   unarchive
+# Renaming tomcat home
+#   command : mv
+# Replacing the default port in the file
+#   template
+# Starting tomcat in the background
+#   shell: nohup <startup.sh> &
