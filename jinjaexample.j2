@@ -1,0 +1,17 @@
+This is hostname : {{inventory_hostname}}
+
+The httpd port number is : {{httpd_port}}
+
+{% if x < y %}
+This is true that x is < y : {{x}} < {{y}}
+{% elif x == y %}
+This is true that x is = y : {{x}} = {{y}}
+{% else %}
+This is true that x is > y : {{x}} > {{y}}
+{% endif %}
+
+{% for num in z %}
+This is a {{num}} loop : {{httpd_port}}
+This is a statement without any variable
+{% endfor %} 
+

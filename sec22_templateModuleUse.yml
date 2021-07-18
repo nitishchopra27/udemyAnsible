@@ -1,0 +1,32 @@
+---
+  # This yml file is created to show 'if/elif/else' conditional statement
+  #   and 'for' loop
+  # 'template' module is used to copy a jinja2 file from ansible control host to all managed nodes
+  #   in the inventory list
+  - hosts: servers14
+    gather_facts: no
+    vars:
+      httpd_port: 7001
+      x: 78
+      y: 78
+      z: [3,4,5,6,7,8]
+    tasks:
+      - name: Copying a file to managed nodes
+        template:
+          src: jinjaexample.j2
+          dest: /tmp/done_with_tem.txt
+
+# Below code shows 'if/elif/else' conditional statement
+  # {% if x < y %}
+  # This is true that x is < y : {{x}} < {{y}}
+  # {% elif x == y %}
+  # This is true that x is = y : {{x}} = {{y}}
+  # {% else %}
+  # This is true that x is > y : {{x}} > {{y}}
+  # {% endif %}
+
+# Below code show 'for' loop
+  # {% for num in z %}
+  # This is a {{num}} loop : {{httpd_port}}
+  # This is a statement without any variable
+  # {% endfor %} 
