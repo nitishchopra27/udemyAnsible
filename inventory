@@ -24,6 +24,10 @@ server5
 server6
 server7
 
+[centos:children]
+centos8
+centos7
+
 [servers14]
 server1
 server2
